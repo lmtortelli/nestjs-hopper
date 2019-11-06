@@ -1,5 +1,5 @@
 # Hopper
-## A NestJS Storage Manegement Module
+## A NestJS Storage Management Module
 
 
 ![Build Status](https://travis-ci.org/lmtortelli/nestjs-hopper.svg?branch=master)
