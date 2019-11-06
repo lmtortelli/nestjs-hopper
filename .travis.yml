@@ -1,5 +1,5 @@
 language: node_js
-
+  version: '10.16.3'
 before_script:
   - npm install
   - npm run build
