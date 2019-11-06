@@ -1,6 +1,7 @@
 language: node_js
-  - '10.16.3'
-  
+  - 10.16.3
+
 before_script:
   - npm install
+  - npm install -g typescript
   - npm run build
