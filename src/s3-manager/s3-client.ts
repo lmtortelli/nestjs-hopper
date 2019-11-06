@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { S3Options } from './interfaces/S3Options.interface'
 import AWS = require('aws-sdk');
 import { HopperFile } from './interfaces/HopperFile.interface' 
-import { ManagedUpload } from 'aws-sdk/clients/s3';
+import { ManagedUpload, CreateBucketOutput, CreateBucketRequest, ListBucketsOutput } from 'aws-sdk/clients/s3';
+import { Route53Resolver } from 'aws-sdk';
 
 @Injectable()
 export class S3Client {
-    private connection : AWS.S3
-
     constructor(
         private readonly options : S3Options
     ) {
@@ -15,7 +14,7 @@ export class S3Client {
         this.connection.config.accessKeyId = options.awsAccessKeyId
         this.connection.config.secretAccessKey = options.awsSecretAccessKey
     }
-
+    
     public async upload (hfile : HopperFile) : Promise<string> {
         const params = {
             Bucket : this.options.awsBucketName,
@@ -31,5 +30,43 @@ export class S3Client {
 
         return Location
     }
+    
+    public async deleteBucket(bucketName: string): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    findSomeObject(prefix : String) : Promise<AWS.S3.Object> {
+        throw new Error("Method not implemented.");
+    }
+
+
+    public async listBuckets(): Promise<AWS.S3.Bucket[] | undefined> {
+        const { 
+            Buckets
+        } = await this.connection.listBuckets((err: Error, data: ListBucketsOutput) => {
+            
+        }).promise()
+
+        return Buckets
+    }
+    
+    public async createBucket(bucketName: string): Promise< string | undefined> {
+        const params = {
+            Bucket : bucketName,
+            CreateBucketConfiguration : {
+                LocationConstraint: this.options.awsRegion
+            }
+        }
+
+        const { Location } = await this.connection.createBucket(params, (err: Error, data : CreateBucketOutput) => {
+           
+        }).promise()
+
+        return Location
+
+    }
+    private connection : AWS.S3
+
+
 
 }

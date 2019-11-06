@@ -21,4 +21,30 @@ export class HopperS3Service {
         return this.connection.upload(hfile)
     }
 
+    /**
+     * Create dynamic Bucket on AWS S3 in runtime
+     * 
+     * @param bucketName 
+     */
+    public createBucket(bucketName : string) : Promise<string | undefined> {
+        return this.connection.createBucket(bucketName)
+    } 
+
+    /**
+     * Retrieve a list of all buckets register on AWS Account and AWS Region
+     */
+    public listBuckets() : Promise<AWS.S3.Bucket[] | undefined > {
+        return this.connection.listBuckets()
+    } 
+
+    /**
+     * Delete a specific bucketName
+     * @param bucketName 
+     */
+    public deleteBucket(bucketName : String) : Promise<boolean> {
+        throw new Error("Method not implemented.");
+    } 
+
+
+
 }

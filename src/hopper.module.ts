@@ -17,7 +17,6 @@ export class HopperModule {
     let exportss = []
     
     if(options.s3) {
-      console.log('testing')
       modules.push(
         HopperS3ManagerModule.register(options.s3)
       )
