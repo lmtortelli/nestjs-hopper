@@ -77,6 +77,9 @@ export interface S3Options {
 }
 ```
 
+As it is under development, I am updating the readme and the code. Any questions contact me by email.
+
+
 # New Features!
 
 | Version | README |
