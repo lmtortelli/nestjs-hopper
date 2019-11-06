@@ -1,13 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { S3Options } from './interfaces/S3Options.interfaces';
+import { S3Options } from './interfaces/S3Options.interface';
 import AWS = require('aws-sdk');
 import { S3Client } from './s3-client';
-import { HopperFile } from './entities/HopperFile.entity';
-import fs = require('fs')
-import path = require('path')
+import { HopperFile } from './interfaces/HopperFile.interface';
 
 @Injectable()
-export class S3ManagerService {
+export class HopperS3Service {
 
     constructor (
         private connection : S3Client)

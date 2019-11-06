@@ -1,24 +1,24 @@
 import { Module, DynamicModule, Provider } from '@nestjs/common';
-import { S3Options } from './interfaces/S3Options.interfaces';
+import { S3Options } from './interfaces/S3Options.interface';
 import { S3Client } from './s3-client'
-import { S3ManagerService } from './s3-manager.service';
+import { HopperS3Service } from './hopper-s3.service';
 
 @Module({})
-export class S3ManagerModule {
+export class HopperS3ManagerModule {
   static register(options : S3Options) : DynamicModule {
       
       const providers : Provider[] = [
         {
           provide: S3Client, useValue: new S3Client(options)
         },
-        S3ManagerService
+        HopperS3Service
       ]
       
       return {
         
-        module : S3ManagerModule,
+        module : HopperS3ManagerModule,
         providers,
-        exports : [S3ManagerService]
+        exports : [HopperS3Service]
     }
   }
 }

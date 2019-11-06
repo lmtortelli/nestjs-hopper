@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { S3Options } from './interfaces/S3Options.interfaces'
+import { S3Options } from './interfaces/S3Options.interface'
 import AWS = require('aws-sdk');
-import { HopperFile } from './entities/HopperFile.entity' 
+import { HopperFile } from './interfaces/HopperFile.interface' 
 import { ManagedUpload } from 'aws-sdk/clients/s3';
 
 @Injectable()

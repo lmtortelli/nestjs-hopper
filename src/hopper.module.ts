@@ -1,31 +1,34 @@
 import { 
   Module, 
-  DynamicModule 
+  DynamicModule, 
+
+
 } from '@nestjs/common';
 import { HopperService } from './hopper.service';
 import { HopperManagerOptions } from './interfaces/hopper-manager-options';
-import { S3ManagerModule } from './s3-manager/s3-manager.module'
+import { HopperS3ManagerModule } from './s3-manager/hopper-s3.module'
+import { HopperS3Service } from './s3-manager/hopper-s3.service';
 
 
-@Module({
-  providers: [HopperService],
-  exports: [HopperService],
-})
+@Module({})
 export class HopperModule {
   static register(options : HopperManagerOptions) : DynamicModule {
     let modules = []
+    let exportss = []
     
     if(options.s3) {
       console.log('testing')
       modules.push(
-        S3ManagerModule.register(options.s3)
+        HopperS3ManagerModule.register(options.s3)
       )
+      exportss.push(HopperS3ManagerModule)
     }
     
     return {
       module: HopperModule,
+      imports: modules,
       providers : [HopperService],
-      imports: modules
+      exports : exportss
     }
   }
 }

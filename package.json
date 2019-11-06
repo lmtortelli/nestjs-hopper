@@ -1,0 +1,36 @@
+{
+  "name": "@lmtortelli/hopper",
+  "version": "0.1.0",
+  "description": "Storage Management in NestJS",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish:npm": "npm run build",
+    "publish:npm": "npm publish --access public",
+    "prepublish:next": "npm run build",
+    "publish:next": "npm publish --access public --tag next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmtortelli/nestjs-hopper.git"
+  },
+  "keywords": [
+    "nestjs",
+    "aws",
+    "s3",
+    "storage",
+    "local",
+    "file"
+  ],
+  "author": "Lucas M. Tortelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmtortelli/nestjs-hopper/issues"
+  },
+  "homepage": "https://github.com/lmtortelli/nestjs-hopper#readme",
+  "dependencies": {
+    "@nestjs/common": "^6.9.0",
+    "aws-sdk": "^2.564.0"
+  }
+}
