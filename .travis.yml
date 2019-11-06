@@ -1,5 +1,5 @@
 language: node_js
-  - 10.16.3
+  - '10'
 
 before_script:
   - npm install
