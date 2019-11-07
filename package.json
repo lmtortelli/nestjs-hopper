@@ -30,8 +30,9 @@
   },
   "homepage": "https://github.com/lmtortelli/nestjs-hopper#readme",
   "dependencies": {
-    "@nestjs/common": "^6.9.0",
-    "aws-sdk": "^2.564.0",
-    "class-validator": "^0.11.0"
+    "aws-sdk": "^2.564.0"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^6.9.0"
   }
 }
