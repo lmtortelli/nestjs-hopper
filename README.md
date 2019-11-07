@@ -85,15 +85,16 @@ As it is under development, I am updating the readme and the code. Any questions
 | Version | README |
 | ------ | ------ |
 | 0.1.0 | First build version |
+| 0.2.0 | Add (CreateBucket, DeleteBucket, listBuckets) on S3 Services |
 
 
 
 
 ### Todos
 
- - All CRUD methods for AWS S3
+ - All CRUD methods for AWS S3 (missing listObjects)
  - Full services for Local Storage
-
+ - Error Handling
 
 License
 ----
