@@ -4,15 +4,21 @@ import AWS = require('aws-sdk');
 import { HopperFile } from './interfaces/HopperFile.interface' 
 import { ManagedUpload, CreateBucketOutput, CreateBucketRequest, ListBucketsOutput } from 'aws-sdk/clients/s3';
 import { Route53Resolver } from 'aws-sdk';
+import { WsArgumentsHost } from '@nestjs/common/interfaces';
 
 @Injectable()
 export class S3Client {
+    
+    private connection : AWS.S3
+    
     constructor(
         private readonly options : S3Options
     ) {
-        this.connection = new AWS.S3({region: options.awsRegion})
-        this.connection.config.accessKeyId = options.awsAccessKeyId
-        this.connection.config.secretAccessKey = options.awsSecretAccessKey
+        this.connection = new AWS.S3({
+            accessKeyId: options.awsAccessKeyId,
+            secretAccessKey: options.awsSecretAccessKey,
+            region: options.awsRegion
+        })
     }
     
     public async upload (hfile : HopperFile) : Promise<string> {
@@ -30,10 +36,18 @@ export class S3Client {
 
         return Location
     }
+
     
-    public async deleteBucket(bucketName: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public async deleteBucket(bucketName: string): Promise<AWS.Request<{}, AWS.AWSError>> {
+        const params = {
+            Bucket : bucketName
+        }
+
+        return this.connection.deleteBucket(params, (err : Error, data) => {
+
+        })
     }
+
 
     findSomeObject(prefix : String) : Promise<AWS.S3.Object> {
         throw new Error("Method not implemented.");
@@ -41,11 +55,13 @@ export class S3Client {
 
 
     public async listBuckets(): Promise<AWS.S3.Bucket[] | undefined> {
+        
         const { 
             Buckets
         } = await this.connection.listBuckets((err: Error, data: ListBucketsOutput) => {
             
         }).promise()
+        
 
         return Buckets
     }
@@ -59,13 +75,12 @@ export class S3Client {
         }
 
         const { Location } = await this.connection.createBucket(params, (err: Error, data : CreateBucketOutput) => {
-           
+            console.log(err)
         }).promise()
 
         return Location
 
     }
-    private connection : AWS.S3
 
 
 

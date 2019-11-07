@@ -41,8 +41,8 @@ export class HopperS3Service {
      * Delete a specific bucketName
      * @param bucketName 
      */
-    public deleteBucket(bucketName : String) : Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public deleteBucket(bucketName : string) : Promise<AWS.Request<{}, AWS.AWSError>> {
+        return this.connection.deleteBucket(bucketName)
     } 
 
 
