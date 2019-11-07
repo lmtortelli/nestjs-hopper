@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HopperService } from './hopper.service';
+import { HopperStorageService } from './hopper-storage.service';
 
-describe('HopperService', () => {
-  let service: HopperService;
+describe('LocalStorageService', () => {
+  let service: HopperStorageService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HopperService],
+      providers: [HopperStorageService],
     }).compile();
 
-    service = module.get<HopperService>(HopperService);
+    service = module.get<HopperStorageService>(HopperStorageService);
   });
 
   it('should be defined', () => {
